@@ -13,14 +13,15 @@
            "x-csrf-token" js/csrfToken}))))
 
 (defn user-action [request]
-  (session/put! :user-event true))
+  (session/put! :user-event true)
+  request)
 
 (defn load-interceptors! []
   (swap! ajax/default-interceptors
-         conj
-         (ajax/to-interceptor {:name "default headers"
+         into
+         [(ajax/to-interceptor {:name "default headers"
                                :request default-headers})
          (ajax/to-interceptor {:name "user action"
-                               :request user-action})))
+                               :request user-action})]))
 
 
