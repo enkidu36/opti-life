@@ -7,6 +7,7 @@
             [markdown.core :refer [md->html]]
             [opti-life.ajax :refer [load-interceptors!]]
             [ajax.core :refer [GET POST]]
+            [opti-life.pages.home-page :as home]
             [opti-life.components.common :as c]
             [opti-life.components.registration :as reg]
             [opti-life.components.login :as l])
@@ -39,7 +40,7 @@
         {:on-click #(swap! collapsed? not)} "☰"]
        [:div.collapse.navbar-toggleable-xs
         (when-not @collapsed? {:class "in"})
-        [:a.navbar-brand {:href "#/"} "opti-life"]
+        [:a.navbar-brand {:href "#/"} "Opti-life"]
         [:ul.nav.navbar-nav
          [nav-link "#/" "Home" :home collapsed?]
          [nav-link "#/about" "About" :about collapsed?]]]
@@ -51,31 +52,17 @@
     [:div.col-md-12
      "this is the story of opti-life... work in progress"]]])
 
-(defn home-page []
-  [:div.container
-   [:div.jumbotron
-    [:h1 "Dr Zorad's Opti-Life"]]
-   [:div.row
-    [:div.col-md-12
-     [:h2 "Welcome Opti-Life"]]]
-   (when-let [docs (session/get :docs)]
-     [:div.row
-      [:div.col-md-12
-       [:div {:dangerouslySetInnerHTML
-              {:__html (md->html docs)}}]]])])
-
 (defn modal []
   (when-let [session-modal (session/get :modal)]
     [session-modal]))
 
 
 (def pages
-  {:home #'home-page
+  {:home #'home/page
    :about #'about-page})
 
 (defn page []
   [:div
-   ;[reg/registration-form]
    [modal]
   [(pages (session/get :page))]])
 

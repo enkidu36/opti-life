@@ -79,3 +79,11 @@ body {
     z-index: 1;
 }
 
+.jumbotron{
+    position: relative;
+    background: yellow;
+    margin-top: 20px;
+    padding: 20px;
+    text-align:left;
+    margin-bottom: 10 !important;
+}

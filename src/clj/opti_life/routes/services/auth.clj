@@ -1,6 +1,6 @@
 (ns opti-life.routes.services.auth
   (:require
-    [opti-life.db.core :as db]
+      [opti-life.db.core :as db]
     [opti-life.validation :refer [registration-errors]]
     [ring.util.http-response :as response]
     [buddy.hashers :as hashers]

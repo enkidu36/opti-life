@@ -1,5 +1,13 @@
 (ns opti-life.components.common)
 
+(defn jumboTron []
+  [:div.jumbotron
+   [:h1 "Dr Zorad's Opti-Life"]
+   [:p "hello | world"]])
+
+(defn greeting []
+  [:h2 "Welcome Opti-Life please sign in  :)"])
+
 (defn modal [header body footer]
   [:div
    [:div.modal-dialog
