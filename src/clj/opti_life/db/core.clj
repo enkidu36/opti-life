@@ -21,7 +21,7 @@
                     :min-idle   1
                     :max-idle   4
                     :max-active 32
-                    :jdbc-url   (System/getenv "JDBC_DATABASE_URL")})
+                    :jdbc-url   "postgresql://jnjplldbdgtovh:9d945e80dbf5500fdb0d69686bbcb25c911e1d5d617f8c5c154b6c351c439171@ec2-54-235-246-201.compute-1.amazonaws.com:5432/d5bqq4m9obq7p1"})
           :stop (conman/disconnect! *db*))
 
 (conman/bind-connection *db* "sql/queries.sql")
