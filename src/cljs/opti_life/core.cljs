@@ -8,6 +8,8 @@
             [opti-life.ajax :refer [load-interceptors!]]
             [ajax.core :refer [GET POST]]
             [opti-life.pages.home-page :as home]
+            [opti-life.pages.food-page :as food]
+            [opti-life.pages.plan-page :as plan]
             [opti-life.components.common :as c]
             [opti-life.components.registration :as reg]
             [opti-life.components.login :as l])
@@ -22,29 +24,31 @@
 
 (defn user-menu []
   (if-let [id (session/get :identity)]
-    [:ul.nav.navbar-nav.pull-xs-right
+    [:ul.nav.justify-content-end
      [:li.nav-item
       [:a.dropdown-item.btn {:on-click #(POST
                                           "/logout"
                                           {:handler (fn [] (session/remove! :identity))})}
        [:i.fa.fa-user] " " id " | sign out"]]]
-    [:ul.nav.navbar-nav.pull-xs-right
+    [:ul.nav.justify-content-end
      [:li.nav-item [l/login-button]]
      [:li.nav-item [reg/registration-button]]]))
 
 (defn navbar []
-  (let [collapsed? (r/atom true)]
+  (let [collapsed? (r/atom false)]
     (fn []
       [:nav.navbar.navbar-light.bg-faded
-       [:button.navbar-toggler.hidden-sm-up
-        {:on-click #(swap! collapsed? not)} "☰"]
-       [:div.collapse.navbar-toggleable-xs
-        (when-not @collapsed? {:class "in"})
-        [:a.navbar-brand {:href "#/"} "Opti-life"]
-        [:ul.nav.navbar-nav
+        [:button.navbar-toggler {
+                                             :on-click    #(swap! collapsed? not)
+                                             :data-toggle "collapse"
+                                             :data-target "#col-nav"} "☰"]
+       [:div#col-nav.collapse.navbar-collapse-xs
+        [:a.navbar-brand {:href "#/"} "Opti-Life"]
+        [:ul.nav.justify-content-center
          [nav-link "#/" "Home" :home collapsed?]
          [nav-link "#/about" "About" :about collapsed?]]]
        [user-menu]])))
+
 
 (defn about-page []
   [:div.container
@@ -59,10 +63,12 @@
 
 (def pages
   {:home #'home/page
+   :food #'food/page
+   :plan #'plan/page
    :about #'about-page})
 
 (defn page []
-  [:div
+  [:div.container-fluid.pr-0.pl-0
    [modal]
   [(pages (session/get :page))]])
 
@@ -72,6 +78,12 @@
 
 (secretary/defroute "/" []
   (session/put! :page :home))
+
+(secretary/defroute "/food" []
+                    (session/put! :page :food))
+
+(secretary/defroute "/plan" []
+                    (session/put! :page :plan))
 
 (secretary/defroute "/about" []
   (session/put! :page :about))
@@ -92,7 +104,8 @@
 
 (defn mount-components []
   (r/render [#'navbar] (.getElementById js/document "navbar"))
-  (r/render [#'page] (.getElementById js/document "app")))
+  (r/render [#'page] (.getElementById js/document "app"))
+  )
 
 (defn init! []
   (load-interceptors!)
