@@ -8,7 +8,7 @@
             [opti-life.ajax :refer [load-interceptors!]]
             [ajax.core :refer [GET POST]]
             [opti-life.pages.home-page :as home]
-            ;[opti-life.pages.food-page :as food]
+            [opti-life.pages.food-page :as food]
             [opti-life.pages.plan-page :as plan]
             [opti-life.components.common :as c]
             [opti-life.components.registration :as reg]
@@ -63,7 +63,7 @@
 
 (def pages
   {:home #'home/page
-   ;:food #'food/page
+   :food #'food/page
    :plan #'plan/page
    :about #'about-page})
 
@@ -79,8 +79,8 @@
 (secretary/defroute "/" []
   (session/put! :page :home))
 
-;(secretary/defroute "/food" []
-;                    (session/put! :page :food))
+(secretary/defroute "/food" []
+                    (session/put! :page :food))
 
 (secretary/defroute "/plan" []
                     (session/put! :page :plan))

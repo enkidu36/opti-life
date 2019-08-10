@@ -7,7 +7,7 @@
                  [metosin/compojure-api "1.1.3"]
                  [cljs-ajax "0.5.8"]
                  [secretary "1.2.3"]
-                 [org.apache.pdfbox/pdfbox "2.0.8"]
+                 [org.apache.pdfbox/pdfbox "2.0.9"]
                  [reagent-utils "0.1.9"]
                  [reagent "0.6.0-rc"]
                  [org.clojure/clojurescript "1.9.92" :scope "provided"]
