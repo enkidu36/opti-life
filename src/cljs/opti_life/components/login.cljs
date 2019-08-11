@@ -1,5 +1,5 @@
 (ns opti-life.components.login
-  (:require [reagent.core :refer [atom]]
+  (:require [reagent.core :as r]
             [reagent.session :as session]
             [goog.crypt.base64 :as b64]
             [clojure.string :as string]
@@ -32,16 +32,16 @@
                 :error-handler #(reset! error (get-in % [:response :message]))})))
 
 (defn login-form []
-  (let [fields (atom {})
-        error (atom nil)]
-    (fn []
+  (let [fields (r/atom {})
+        error (r/atom nil)]
+     (fn []
       [c/modal
        [:div "Opti-Life Login"]
-       [:div {:on-key-press (fn [e] (when (and (not-empty @fields) (= 13 (.-charCode e)))
+       [:div#username {:on-key-press (fn [e] (when (and (not-empty @fields) (= 13 (.-charCode e)))
                                              (login! fields error)))}
         [:div.well.well-sm [:strong "* required field"]]
-        [c/text-input "name" :id "enter a user name" fields]
-        [c/password-input "password" :pass "enter a password" fields]
+        [c/text-input-focus "name" :id "enter a user name" fields ]
+        [c/password-input "password" :pass "enter a password" fields ]
         (when-let [error @error]
           [:div.alert.alert-danger error])]
        [:div
