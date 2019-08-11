@@ -1,6 +1,6 @@
 (defproject opti-life "0.1.0-SNAPSHOT"
 
-  :description "Opti-Life Food"
+  :description "Opti-Life Food Rotation"
   :url "http://example.com/FIXME"
 
   :dependencies [[luminus-log4j "0.1.3"]

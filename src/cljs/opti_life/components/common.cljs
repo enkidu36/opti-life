@@ -30,7 +30,8 @@
                                      :aria-expanded "false"} "Dropdown"]
        [:div.dropdown-menu
         [:a.dropdown-item {:href "#"} "Action"]
-        [:a.dropdown-item {:href "#"} "Another Action"]]]
+        [:a.dropdown-item {:href "#"} "Another Action"]
+        [:a.dropdown-item {:href "#"} "Never gets old"]]]
       [:li
        [:a.nav-link {:class "active" :href "#/plan"} "Plan"]]
       [:li
