@@ -1,11 +1,14 @@
-(ns opti-life.pages.home-page
+(ns opti-life.pages.food-page
   (:require [reagent.session :as session]
+            [ajax.core :refer [GET]]
             [opti-life.components.common :as c]
-            [markdown.core :refer [md->html]]))
+            [opti-life.components.foods :as f]))
 
 
 (defn main []
-  [:h2 "Welcome Opti-Life - Let's get started :)"]  )
+  [:div
+   ;[f/add-form]
+   [f/food-table]])
 
 (defn page []
   [:div.container
