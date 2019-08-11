@@ -9,7 +9,7 @@
 
 (defn page []
   [:div.container
-   [c/jumboTron]
+   [c/jumbo-tron]
    [:div.row
     [:div.col-md-12
      (if (nil? (session/get :identity))

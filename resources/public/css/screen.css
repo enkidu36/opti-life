@@ -87,3 +87,72 @@ body {
     text-align:left;
     margin-bottom: 10 !important;
 }
+
+.my-class {
+    border: 0px;
+    padding: 10px 15px;
+  }
+
+.th-class {
+    border: 0px;
+    border-bottom: 4px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 10px 15px;
+    color: green;
+  }
+
+  .tr-class {
+    padding: 25px;
+  }
+
+
+.food-category {
+    border-bottom: solid;
+    padding-top: 20px;
+}
+
+th:last-child {
+
+}
+
+th:last-child, td:last-child {
+    border-right: 0px;
+}
+
+.food-table {
+    margin-top: 20px;
+
+}
+.scroll {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.cal-table {
+    table-layout: fixed;
+}
+
+.cal-body {
+    min-height: 188px;
+}
+
+.cal-day {
+    width: 100%;
+    padding: 0px !important;
+}
+
+.cal-summary-col {
+     width: 200px;
+   padding: 0px !important;
+  }
+
+ .cal-header-day-col {
+     width: 100%;
+
+ }
+ .cal-summary-header-col {
+       width: 206px;
+       padding-left: 0px !important;
+       padding-right: 0px !important;
+   }

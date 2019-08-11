@@ -10,7 +10,7 @@
             [opti-life.pages.home-page :as home]
             [opti-life.pages.food-page :as food]
             [opti-life.pages.plan-page :as plan]
-            [opti-life.components.common :as c]
+              [opti-life.components.common :as c]
             [opti-life.components.registration :as reg]
             [opti-life.components.login :as l])
   (:import goog.History))

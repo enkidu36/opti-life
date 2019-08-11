@@ -8,6 +8,6 @@
   (layout/render "home.html"))
 
 (defroutes home-routes
-  (GET "/" [] (home-page))
-  (GET "/docs" [] (response/ok (-> "docs/docs.md" io/resource slurp))))
+           (GET "/" [] (home-page))
+           (GET "/docs" [] (response/ok (-> "docs/docs.md" io/resource slurp))))
 

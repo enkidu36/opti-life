@@ -3,9 +3,22 @@
             [ring.util.http-response :as response]
             [clojure.tools.logging :as log]))
 
-(defn get-all-categories []
+(defn add-food [food]
   (try
-    (response/ok (db/all-food-categories))
-     (catch Exception e
-       (log/error e)
-       (response/internal-server-error {:result :error :message "server error occurred while adding the user"})   )))
+    ;; merge in default values for HugSql.
+    ;; Is there a better way?
+    (let [saveMap (merge {:calories nil, :protein nil, :fats nil, :carbs nil, :sugars nil, :sodium nil} food)]
+      (db/create-food saveMap)
+
+      (-> {:result :ok}
+          (response/ok)))
+    (catch Exception e
+       (log/error (.getNextException e)))))
+
+(defn all-foods []
+  (try
+    (let [data (db/all-foods)]
+      (log/info data)
+        (response/ok data))
+   (catch Exception e
+      (log/error (.getNextException e)))))

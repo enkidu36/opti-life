@@ -14,23 +14,23 @@ WHERE id = :id
 DELETE FROM users
 WHERE id = :id
 
--- :name create-food-category! :! :n
--- :doc creates a new food-category
-INSERT INTO food_category
-(id, name, description)
-VALUES (:id, :name, :description)
+-- :name create-food :! :n
+-- :doc creates a new food
+INSERT INTO food
+(name, food_category, calories, carbs, fats, protein, sugars, sodium)
+VALUES (:name, :food_category ::category, :calories, :carbs, :fats, :protein, :sugars, :sodium)
 
--- :name get-food-category :? :1
--- :doc retrieves a food-category by id
-SELECT * FROM food-category
+-- :name get-food :? :1
+-- :doc get a food by id
+SELECT * FROM food
 WHERE id = :id
 
+-- :name all-foods :? :*
+-- :doc retrieves all the foods
+SELECT id, name, food_category FROM food
 
--- :name all-food-categories :? :*
--- :desc get all the food categories
-SELECT * FROM food_category
-
--- :name delete-food-category! :! :n
--- :desc delete a food category by id
-DELETE FROM food-category
+-- :name delete food! :! :n
+-- :doc delete food
+DELETE FROM food
 WHERE id = :id
+

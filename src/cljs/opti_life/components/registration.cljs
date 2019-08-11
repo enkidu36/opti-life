@@ -35,9 +35,9 @@
           [:div.alert.alert-danger error])
         [c/password-input "Password" :pass-confirm "re-enter a password" fields]
 
+        ;; Server error
         (when-let [error (:server-error @error)]
-          [:div.alert.alert-danger error])
-        ]
+          [:div.alert.alert-danger error])]
 
        [:div
         [:button.btn.btn-primary {:on-click #(register! fields error)} "Register"]
@@ -45,6 +45,6 @@
 
 (defn registration-button []
   [:a.btn
-   {:on-click #(session/put! :modal registration-form)}
+   {:style {:cursor "default"} :on-click #(session/put! :modal registration-form)}
    "register"])
 
