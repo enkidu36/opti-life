@@ -51,7 +51,7 @@
       [:div.col-4.pt-3.pb-3 ]])])
 
 (defn greeting []
-  [:h2 "Welcome Opti-Life please sign in  :)"])
+  [:h2 "Welcome to Opti-Life please sign in  :)"])
 
 (defn modal [header body footer]
   [:div
@@ -62,28 +62,16 @@
      [:div.modal-footer [:div.bootstrap-dialog-footer footer]]]]
    [:div.modal-backdrop.fade.in]])
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Base input functions
+;; TODO: Reduce duplication of input code with inputs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn input [type id placeholder fields]
   [:input.form-control.input-lg
    {:type        type
     :placeholder placeholder
     :value       (id @fields)
     :on-change   #(swap! fields assoc id (-> % .-target .-value))}])
-
-(defn input-number [type id placeholder fields]
-  [:input.form-control.input-lg
-   {:type        type
-    :placeholder placeholder
-    :value       (id @fields)
-    :on-change   #(swap! fields assoc id (int (-> % .-target .-value)))}])
-
-(defn form-number-input [type label id placeholder fields optional?]
-  [:div.form-group
-   [:label label]
-   (if optional?
-     [input-number type id placeholder fields]
-     [:div.input-group
-      [input-number type id placeholder fields]
-      [:span.input-group-addon " * "]])])
 
 (defn form-input [type label id placeholder fields optional?]
   [:div.form-group
@@ -97,12 +85,12 @@
 (defn text-input [label id placeholder fields & [optional?]]
   (form-input :text label id placeholder fields optional?))
 
-(defn text-number [label id placeholder fields optional?]
-  (form-number-input :number label id placeholder fields optional?))
-
 (defn password-input [label id placeholder fields & [optional?]]
   (form-input :password label id placeholder fields optional?))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Select Component
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defn create-select [label id placeholder fields items]
   [:select.custom-select.custom-select-md
    {:value (if (empty? @fields) "" (id @fields))
@@ -119,6 +107,55 @@
      [:div.input-group
       (create-select label id placeholder fields items)
       [:span.input-group-addon " * "]])])
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Input number
+;; TODO: Reduce duplication of input code with inputs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn input-number [type id placeholder fields]
+  [:input.form-control.input-lg
+   {:type        type
+    :placeholder placeholder
+    :value       (id @fields)
+    :on-change   #(swap! fields assoc id (int (-> % .-target .-value)))}])
+
+(defn form-number-input [type label id placeholder fields optional?]
+  [:div.form-group
+   [:label label]
+   (if optional?
+     [input-number type id placeholder fields]
+     [:div.input-group
+      [input-number type id placeholder fields]
+      [:span.input-group-addon " * "]])])
+
+(defn text-number [label id placeholder fields optional?]
+  (form-number-input :number label id placeholder fields optional?))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Input number
+;; TODO: Reduce duplication of input code with inputs
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn input-focus [type id placeholder fields]
+  [:input.form-control.input-lg
+   {:type        type
+    :auto-focus true
+    :placeholder placeholder
+    :value       (id @fields)
+    :on-change   #(swap! fields assoc id (-> % .-target .-value))}])
+
+(defn form-input-focus [type label id placeholder fields optional?]
+  [:div.form-group
+   [:label label]
+   (if optional?
+     [input-focus type id placeholder fields]
+     [:div.input-group
+      [input-focus type id placeholder fields]
+      [:span.input-group-addon " * "]])])
+
+(defn text-input-focus [label id placeholder fields & [optional?]]
+  (form-input-focus :text label id placeholder fields optional?))
+
+
 
 
 

@@ -5,7 +5,7 @@
 
 
 (defn main []
-  [:h2 "Welcome Opti-Life - Let's get started :)"]  )
+  [:h2 "Welcome to Opti-Life - Let's get started :)"]  )
 
 (defn page []
   [:div.container

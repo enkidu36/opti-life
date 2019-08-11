@@ -1,7 +1,7 @@
 (defproject opti-life "0.1.0-SNAPSHOT"
 
-  :description "Opti-Life Food Rotation"
-  :url "http://example.com/FIXME"
+  :description "Opti-Life Food Rotation planning site"
+  :url "http://young-stream-97729.herokuapp.com"
 
   :dependencies [[luminus-log4j "0.1.3"]
                  [metosin/compojure-api "1.1.3"]

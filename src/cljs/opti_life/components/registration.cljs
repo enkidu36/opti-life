@@ -27,7 +27,7 @@
                                       (register! fields error)))}
         [:div.well.well.sm [:strong "* required field"]]
 
-        [c/text-input "Name" :id "enter a user name" fields]
+        [c/text-input-focus "Name" :id "enter a user name" fields]
         (when-let [error (first (:id @error))]
           [:div.alert.alert-danger error])
         [c/password-input "Password" :pass "enter a password" fields]
