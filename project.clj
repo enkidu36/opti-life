@@ -1,6 +1,6 @@
 (defproject opti-life "0.1.0-SNAPSHOT"
 
-  :description "Opti-Life web"
+  :description "Opti-Life Food"
   :url "http://example.com/FIXME"
 
   :dependencies [[luminus-log4j "0.1.3"]
