@@ -23,7 +23,7 @@
                     :max-active 32
                     :jdbc-url  (if (:dev env) 
                                  (:database-url env) 
-                                 (System/getenv "JDBC_DATABASE_URL"))})
+                                 (System/getenv "DATABASE_URL"))})
           :stop (conman/disconnect! *db*))
 
 (conman/bind-connection *db* "sql/queries.sql")
