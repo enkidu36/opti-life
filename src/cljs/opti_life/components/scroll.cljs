@@ -33,7 +33,6 @@
                                 threshold))))))
 
 (defn container-el [id]
-  (js/console.log (str "test" (.getElementById js/document id)))
   (if id
     (.getElementById js/document id)
     js/window))
@@ -49,27 +48,33 @@
         detach-scroll-listener (fn []
                                  (when @listener-fn
                                    (.removeEventListener (container-el id) "scroll" @listener-fn)
-                                   ;(.removeEventListener (container-el id) "resize" @listener-fn)
                                    (reset! listener-fn nil)))
-        should-load-more? (fn [this]
-                            (let [node (r/dom-node this)
-                                  scroll-top (get-scroll-top)
-                                  my-top (get-el-top-position node)
-                                  threshold 50]
-                               (set! (.-innerHTML (container-el "scroll-height")) (str "Scroll height: " (.-scrollHeight (container-el id))))
-                               (set! (.-innerHTML (container-el "scroll-position")) (str "Position: "(scroll-plus-offset (container-el id))))
-                               (set! (.-innerHTML (container-el "scroll-top")) (str "Scroll top: "(.-scrollTop (container-el id))))
-                               (or
-                                 (= (.-scrollHeight (container-el id)) (scroll-plus-offset (container-el id)))
-                                 (< (.-scrollTop (container-el id)) threshold))))
+        should-load-back? (fn [this]
+                            ;; Load previous weeks if scrolling near the top of the viewer
+                            (let [threshold 50
+                                  list-top (.-scrollTop (container-el id))]
+                              (println "heree")
+                               ;(set! (.-innerHTML (container-el "scroll-height")) (str "Scroll height: " (.-scrollHeight (container-el id))))
+                               ;(set! (.-innerHTML (container-el "scroll-position")) (str "Position: "(scroll-plus-offset (container-el id))))
+                               ;(set! (.-innerHTML (container-el "scroll-top")) (str "Scroll top: "(.-scrollTop (container-el id))))
+                                (<  list-top threshold)))
+        should-load-forward?  (fn [this]
+                                ;; Load upcoming weeks if near the bottom of the list
+                                (let [list-bottom (.-scrollHeight (container-el id))
+                                      view-bottom (scroll-plus-offset (container-el id))]
+                                   (=  list-bottom view-bottom)))
         scroll-listener (fn [this]
                           (when (safe-component-mounted? this)
-                            (let [{:keys [load-fn can-show-more?]} (r/props this)]
+                            (let [{:keys [back-fn forward-fn can-show-more?]} (r/props this)
+                                  load-back? (should-load-back? this)
+                                  load-forward? (should-load-forward? this)]
                               (when (and can-show-more?
-                                         (should-load-more? this))
-                                (println "loading more...")
+                                         (or load-back? load-forward?))
                                 (detach-scroll-listener)
-                                (load-fn)))))
+
+                                (if load-back?
+                                  (back-fn this)
+                                  (forward-fn this))))))
         debounced-scroll-listener (debounce 200 scroll-listener)
         attach-scroll-listener (fn [this]
                                  (let [{:keys [can-show-more?]} (r/props this)]
@@ -84,7 +89,7 @@
          (-> js/document
              (.querySelector "#plan-cal")
              (.-scrollTop)
-             (set! 330)))
+             (set! -200)))
        :component-did-update
        (fn [this _]
          (attach-scroll-listener this))
