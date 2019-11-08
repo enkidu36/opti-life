@@ -1,35 +1,14 @@
 (ns opti-life.pages.plan-page
   (:require [opti-life.components.common :as c]
+            [opti-life.components.date-util :as d]
             [reagent.session :as session]
-            [reagent.core :as reagent]
-            [cljs-time.core :as t]
-            [cljs-time.format :as f]
-            [cljs-time.predicates :as predicate]
-            [cljs-time.periodic :as periodic]))
-
-(def days ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
-
-(defn last-monday[date]
-  (if (predicate/monday? date)
-    date ; It is already Monday
-    (let [today-week-day (t/day-of-week date)
-          offset (- today-week-day 1)]
-      (t/minus date (t/days offset)))))
-
-(defn build-calendar-dates []
-  (let [today (t/today)
-        last-monday (last-monday today)
-        start-date (t/minus last-monday (t/days 14))]
-    (mapv #(t/plus start-date (t/days %)) (range 43))))
-
-(defn date->string [date, format]
-  (f/unparse (f/formatter format) date) )
+            [reagent.core :as reagent]))
 
 (defn cal-header-table []
   [:table.table.cal-table.mb-0
    [:tbody
     [:tr
-     (for [day days]
+     (for [day d/days]
        [:th.cal-header-day-col {:key day } day])
      [:th.cal-summary-header-col ""]]]])
 
@@ -50,10 +29,10 @@
            ;; Column body row
            [:tr {:key row}
             ;; Calendar day columns
-            (for [col (range (count days))]
+            (for [col (range (count d/days))]
               (let [date (nth dates (+ (* row 7) (+ col 0)))
-                    month (date->string date "MMMM")
-                    day (date->string date "d")]
+                    month (d/date->string date "MMMM")
+                    day (d/date->string date "d")]
                 [:td.cal-day.cal-body.pt-0.pb-0 {:key date}
                  [:div {:style {:backgroundColor "yellow" :text-align "left"}} (if (or (= day "1") (and (= row 0) (= col 0)))
                                                                                  (str month " " day)
@@ -82,10 +61,10 @@
       ;; Column body row
       [:tr {:key row}
        ;; Calendar day columns
-       (for [col (range (count days))]
+       (for [col (range (count d/days))]
          (let [date (nth dates (+ (* row 7) (+ col 0)))
-               month (date->string date "MMMM")
-               day (date->string date "d")]
+               month (d/date->string date "MMMM")
+               day (d/date->string date "d")]
            [:td.cal-day.cal-body.pt-0.pb-0 {:key date}
             [:div {:style {:backgroundColor "yellow" :text-align "left"}} (if (or (= day "1") (and (= row 0) (= col 0)))
                                                                             (str month " " day)
@@ -117,7 +96,7 @@
   [calendar dates])
 
 (defn page []
-  (let [dates (build-calendar-dates)]
+  (let [dates (d/build-calendar-dates)]
       [:div
      [c/menu-w-drpdown]
      [c/spacer-row]

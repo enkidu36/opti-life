@@ -7,6 +7,7 @@
  (when (session/get :identity)
    [:div
     [:a {:href "#/food"} "food"] " | "
+    [:a {:href "#/scroll"} "scroll"] " | "
     [:a {:href "#/plan"} "plan"]])])
 
 (defn menu []
@@ -15,6 +16,7 @@
      [:div.row.justify-content-center {:style {:backgroundColor "#e6f7ff"}}
       [:div.col-4.pt-2.pb-2 {:style {:text-align "center"}}
        [:a {:href "#/food"} "food"] " | "
+       [:a {:href "#/scroll"} "scroll"] " | "
        [:a {:href "#/plan"} "plan"]]])])
 
 (defn menu-w-drpdown []

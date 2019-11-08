@@ -10,7 +10,8 @@
             [opti-life.pages.home-page :as home]
             [opti-life.pages.food-page :as food]
             [opti-life.pages.plan-page :as plan]
-              [opti-life.components.common :as c]
+            [opti-life.pages.scroll-page :as scroll]
+            [opti-life.components.common :as c]
             [opti-life.components.registration :as reg]
             [opti-life.components.login :as l])
   (:import goog.History))
@@ -56,6 +57,12 @@
     [:div.col-md-12
      "this is the story of opti-life... work in progress"]]])
 
+(defn scroll-page []
+  [:div.container
+   [:div.row
+    [:div.col-md-12
+     "scroll page"]]])
+
 (defn modal []
   (when-let [session-modal (session/get :modal)]
     [session-modal]))
@@ -65,6 +72,7 @@
   {:home #'home/page
    :food #'food/page
    :plan #'plan/page
+   :scroll #'scroll/page
    :about #'about-page})
 
 (defn page []
@@ -86,7 +94,11 @@
                     (session/put! :page :plan))
 
 (secretary/defroute "/about" []
-  (session/put! :page :about))
+                    (session/put! :page :about))
+
+(secretary/defroute "/scroll" []
+                    (session/put! :page :scroll))
+
 
 ;; -------------------------
 ;; History
