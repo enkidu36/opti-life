@@ -54,15 +54,15 @@
                             (let [threshold 50
                                   list-top (.-scrollTop (container-el id))]
                               (println "heree")
-                               ;(set! (.-innerHTML (container-el "scroll-height")) (str "Scroll height: " (.-scrollHeight (container-el id))))
-                               ;(set! (.-innerHTML (container-el "scroll-position")) (str "Position: "(scroll-plus-offset (container-el id))))
-                               ;(set! (.-innerHTML (container-el "scroll-top")) (str "Scroll top: "(.-scrollTop (container-el id))))
+                               (set! (.-innerHTML (container-el "scroll-height")) (str "Scroll height: " (.-scrollHeight (container-el id))))
+                               (set! (.-innerHTML (container-el "scroll-position")) (str " bottom Position: "(scroll-plus-offset (container-el id))))
+                               (set! (.-innerHTML (container-el "scroll-top")) (str "Scroll top: "(.-scrollTop (container-el id))))
                                 (<  list-top threshold)))
         should-load-forward?  (fn [this]
                                 ;; Load upcoming weeks if near the bottom of the list
-                                (let [list-bottom (.-scrollHeight (container-el id))
+                                (let [scroll-height (.-scrollHeight (container-el id))
                                       view-bottom (scroll-plus-offset (container-el id))]
-                                   (=  list-bottom view-bottom)))
+                                   (> view-bottom (- scroll-height 10))))
         scroll-listener (fn [this]
                           (when (safe-component-mounted? this)
                             (let [{:keys [back-fn forward-fn can-show-more?]} (r/props this)
