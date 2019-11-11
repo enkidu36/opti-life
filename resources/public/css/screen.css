@@ -124,7 +124,7 @@ th:last-child, td:last-child {
 
 }
 .scroll {
-  max-height: 540px;
+  max-height: calc(100% - 30px);
   overflow-y: none;
   overflow-x: auto;
 }
@@ -228,4 +228,31 @@ th:last-child, td:last-child {
     .no-scroll {
      overflow-x: hidden;
      overflow-y: hidden;
+   }
+
+
+
+   #app {
+    height: calc(100% - 58px);
+   }
+
+   .test-class {
+    height: 100%;
+   }
+
+   .flex-container {
+        display: flex;
+        background: dodgerBlue;
+        align-content: stretch;
+        height: 100%;
+   }
+
+   .flex-container > div {
+     background-color: #f1f1f1;
+     width: 100px;
+     margin: 2px;
+     text-align: center;
+     line-height: 75px;
+     font-size: 30px;
+
    }

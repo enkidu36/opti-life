@@ -11,6 +11,7 @@
             [opti-life.pages.food-page :as food]
             [opti-life.pages.plan-page :as plan]
             [opti-life.pages.scroll-page :as scroll]
+            [opti-life.pages.sandbox-page :as sb]
             [opti-life.components.common :as c]
             [opti-life.components.registration :as reg]
             [opti-life.components.login :as l])
@@ -57,12 +58,6 @@
     [:div.col-md-12
      "this is the story of opti-life... work in progress"]]])
 
-(defn scroll-page []
-  [:div.container
-   [:div.row
-    [:div.col-md-12
-     "scroll page"]]])
-
 (defn modal []
   (when-let [session-modal (session/get :modal)]
     [session-modal]))
@@ -73,12 +68,14 @@
    :food #'food/page
    :plan #'plan/page
    :scroll #'scroll/page
-   :about #'about-page})
+   :about #'about-page
+   :sandbox #'sb/page})
 
 (defn page []
-  [:div.container-fluid.pr-0.pl-0
+  [:div.test-class
    [modal]
   [(pages (session/get :page))]])
+
 
 ;; -------------------------
 ;; Routes
@@ -98,6 +95,9 @@
 
 (secretary/defroute "/scroll" []
                     (session/put! :page :scroll))
+
+(secretary/defroute "/sandbox" []
+                   (session/put! :page :sandbox))
 
 
 ;; -------------------------

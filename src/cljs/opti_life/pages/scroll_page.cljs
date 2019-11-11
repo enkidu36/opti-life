@@ -49,7 +49,7 @@
             "Scroll to here"
 
             :else
-            "No more items!!!")]
+            "No more items!!!!!")]
          [scroll/infinite-scroll {:can-show-more? more-items-available?
                                   :container-id "plan-cal"
                                   :back-fn (fn []
@@ -78,13 +78,12 @@
                                                   1000))}]]])))
 
 (defn page []
-  [:div {:style {:backgroundColor "orange"
-                 :height "100%"}}
+    [:div.test-class
    ;[c/menu-w-drpdown]
    ;[c/spacer-row]
-   (let [count (count (:items @db))]
-     [:div [:p (str count)]]
-     )
+   ;(let [count (count (:items @db))]
+   ;  [:div [:p (str count)]]
+   ;  )
 
    ;[:div#scroll-height.ml-4 0]
    ;[:div#scroll-position.ml-4 0]
