@@ -54,9 +54,9 @@
                             (let [threshold 50
                                   list-top (.-scrollTop (container-el id))]
                               (println "heree")
-                               (set! (.-innerHTML (container-el "scroll-height")) (str "Scroll height: " (.-scrollHeight (container-el id))))
-                               (set! (.-innerHTML (container-el "scroll-position")) (str " bottom Position: "(scroll-plus-offset (container-el id))))
-                               (set! (.-innerHTML (container-el "scroll-top")) (str "Scroll top: "(.-scrollTop (container-el id))))
+                               ;(set! (.-innerHTML (container-el "scroll-height")) (str "Scroll height: " (.-scrollHeight (container-el id))))
+                               ;(set! (.-innerHTML (container-el "scroll-position")) (str " bottom Position: "(scroll-plus-offset (container-el id))))
+                               ;(set! (.-innerHTML (container-el "scroll-top")) (str "Scroll top: "(.-scrollTop (container-el id))))
                                 (<  list-top threshold)))
         should-load-forward?  (fn [this]
                                 ;; Load upcoming weeks if near the bottom of the list
