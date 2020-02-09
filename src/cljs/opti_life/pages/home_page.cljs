@@ -8,7 +8,7 @@
   [:h2 "Welcome to Opti-Life - Let's get started :)"]  )
 
 (defn page []
-  [:div.container
+  [:div
    [c/jumbo-tron]
    [:div.row
     [:div.col-md-12

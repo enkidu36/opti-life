@@ -12,9 +12,11 @@
             [opti-life.pages.plan-page :as plan]
             [opti-life.pages.scroll-page :as scroll]
             [opti-life.pages.sandbox-page :as sb]
+            [opti-life.pages.reactivity-page :as reactivity]
             [opti-life.components.common :as c]
             [opti-life.components.registration :as reg]
-            [opti-life.components.login :as l])
+            [opti-life.components.login :as l]
+            [opti-life.pages.rotation.rotation-page :as rotation])
   (:import goog.History))
 
 (defn nav-link [uri title page collapsed?]
@@ -48,6 +50,7 @@
         [:a.navbar-brand {:href "#/"} "Opti-Life"]
         [:ul.nav.justify-content-center
          [nav-link "#/" "Home" :home collapsed?]
+         [nav-link "#/reactivity" :reactivity collapsed?]
          [nav-link "#/about" "About" :about collapsed?]]]
        [user-menu]])))
 
@@ -68,8 +71,10 @@
    :food #'food/page
    :plan #'plan/page
    :scroll #'scroll/page
+   :reactivity #'reactivity/page
    :about #'about-page
-   :sandbox #'sb/page})
+   :sandbox #'sb/page
+   :rotation #'rotation/page})
 
 (defn page []
   [:div.test-class
@@ -95,6 +100,12 @@
 
 (secretary/defroute "/scroll" []
                     (session/put! :page :scroll))
+
+(secretary/defroute "/rotation" []
+                    (session/put! :page :rotation))
+
+(secretary/defroute "/reactivity" []
+                    (session/put! :page :reactivity))
 
 (secretary/defroute "/sandbox" []
                    (session/put! :page :sandbox))

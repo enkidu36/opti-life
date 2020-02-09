@@ -85,9 +85,6 @@
    ;  [:div [:p (str count)]]
    ;  )
 
-   ;[:div#scroll-height.ml-4 0]
-   ;[:div#scroll-position.ml-4 0]
-   ;[:div#scroll-top.ml-4 0]
      (if (nil? (session/get :identity))
        [c/greeting]
        [main])])

@@ -26,7 +26,7 @@
                                  (System/getenv "JDBC_DATABASE_URL"))})
           :stop (conman/disconnect! *db*))
 
-(conman/bind-connection *db* "sql/queries.sql")
+(conman/bind-connection *db* "sql/queries.sql" "sql/user_test.sql")
 
 (defn to-date [sql-date]
   (-> sql-date (.getTime) (java.util.Date.)))

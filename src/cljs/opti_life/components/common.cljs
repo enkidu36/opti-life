@@ -1,23 +1,19 @@
 (ns opti-life.components.common
   (:require [reagent.session :as session]))
 
+(defn header []
+  )
+
 (defn jumbo-tron []
 [:div.jumbotron
  [:h1 "Dr Zorad's Opti-Life"]
  (when (session/get :identity)
    [:div
     [:a {:href "#/food"} "food"] " | "
+    [:a {:href "#/reactivity"} "reactivity"] " | "
     [:a {:href "#/scroll"} "scroll"] " | "
-    [:a {:href "#/plan"} "plan"]])])
-
-(defn menu []
-  [:div
-   (when (session/get :identity)
-     [:div.row.justify-content-center {:style {:backgroundColor "#e6f7ff"}}
-      [:div.col-4.pt-2.pb-2 {:style {:text-align "center"}}
-       [:a {:href "#/food"} "food"] " | "
-       [:a {:href "#/scroll"} "scroll"] " | "
-       [:a {:href "#/plan"} "plan"]]])])
+    [:a {:href "#/plan"} "plan"] " | "
+    [:a {:href "#/rotation"} "rotation"]])])
 
 (defn menu-w-drpdown []
   [:div

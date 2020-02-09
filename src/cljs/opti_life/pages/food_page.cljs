@@ -11,7 +11,7 @@
    [f/food-table]])
 
 (defn page []
-  [:div.container
+  [:div
    [c/jumbo-tron]
    [:div.row
     [:div.col-md-12

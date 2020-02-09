@@ -34,3 +34,5 @@ SELECT id, name, food_category FROM food
 DELETE FROM food
 WHERE id = :id
 
+
+

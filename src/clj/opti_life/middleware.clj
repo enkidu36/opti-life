@@ -88,6 +88,6 @@
       (wrap-defaults
         (-> site-defaults
             (assoc-in [:security :anti-forgery] false)
-            (dissoc :session)))
+            (assoc-in [:params :multipart] true)))
       wrap-context
       wrap-internal-error))

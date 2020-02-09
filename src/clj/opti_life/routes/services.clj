@@ -1,11 +1,11 @@
 (ns opti-life.routes.services
   (:require [opti-life.routes.services.auth :as a]
             [opti-life.routes.services.food :as food]
+            [opti-life.routes.services.user-test :as user-test]
+            [opti-life.routes.services.file-upload :refer [handle-upload fetch-user-tests]]
             [ring.util.http-response :refer :all]
             [compojure.api.sweet :refer :all]
-            [schema.core :as s])
-  (:import (org.postgresql.core BaseResultSet)
-           (java.text.spi DateFormatProvider)))
+            [schema.core :as s]))
 
 
 (s/defschema UserRegistration
@@ -17,6 +17,12 @@
   {(s/optional-key :id) s/Int
    :name s/Str
    :food_category s/Str})
+
+(s/defschema UserTest
+  {(s/optional-key :id) s/Int
+   :user_id s/Str
+   :admin_date s/Inst
+   :file_type s/Str})
 
 (s/defschema Result
   {:result                   s/Keyword
@@ -37,7 +43,15 @@
   (GET "/all-foods" []
        :summary "Retrieve all foods"
        :return [Food]
-    (food/all-foods)  )
+    (food/all-foods))
+
+  (GET "/fetch-tests" req
+       :summary "Retrieves all foods for user"
+        :return [UserTest]
+       (fetch-user-tests req))
+
+  (POST "/upload" req
+    (handle-upload req))
 
   (POST "/register" req
     :return Result
